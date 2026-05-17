@@ -1,19 +1,49 @@
 import { useState } from 'react';
-import { ArrowRight, CheckCircle2, Mail } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Loader2, Mail } from 'lucide-react';
+
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xzdwbzzk';
 
 export default function Contact() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<'idle' | 'loading' | 'done' | 'error'>('idle');
+  const [errorMsg, setErrorMsg] = useState('');
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !message) return;
-    setSent(true);
-    setName('');
-    setEmail('');
-    setMessage('');
+
+    setStatus('loading');
+    setErrorMsg('');
+
+    try {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({ name, email, message }),
+      });
+
+      if (response.ok) {
+        setStatus('done');
+        setName('');
+        setEmail('');
+        setMessage('');
+      } else {
+        const data = await response.json().catch(() => null);
+        setStatus('error');
+        setErrorMsg(
+          data?.errors?.[0]?.message ||
+            'Något gick fel. Försök igen eller mejla mig direkt.'
+        );
+      }
+    } catch {
+      setStatus('error');
+      setErrorMsg('Något gick fel. Försök igen eller mejla mig direkt.');
+    }
   };
 
   return (
@@ -41,7 +71,7 @@ export default function Contact() {
             </div>
 
             <div className="lg:col-span-7">
-              {sent ? (
+              {status === 'done' ? (
                 <div className="rounded-2xl bg-white/5 border border-gold/30 p-8 flex items-start gap-4">
                   <CheckCircle2 className="w-6 h-6 text-gold flex-shrink-0 mt-0.5" />
                   <div>
@@ -61,6 +91,7 @@ export default function Contact() {
                     </div>
                     <input
                       type="text"
+                      name="name"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       className="w-full bg-white/5 border border-white/15 rounded-lg px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-gold transition-colors"
@@ -74,6 +105,7 @@ export default function Contact() {
                     </div>
                     <input
                       type="email"
+                      name="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       required
@@ -87,6 +119,7 @@ export default function Contact() {
                       Meddelande
                     </div>
                     <textarea
+                      name="message"
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
                       required
@@ -98,11 +131,25 @@ export default function Contact() {
 
                   <button
                     type="submit"
-                    className="group inline-flex items-center justify-center gap-2 w-full sm:w-auto px-7 py-3.5 rounded-lg bg-gold text-navy font-medium hover:bg-white transition-colors"
+                    disabled={status === 'loading'}
+                    className="group inline-flex items-center justify-center gap-2 w-full sm:w-auto px-7 py-3.5 rounded-lg bg-gold text-navy font-medium hover:bg-white transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    Skicka
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    {status === 'loading' ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        Skickar...
+                      </>
+                    ) : (
+                      <>
+                        Skicka
+                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      </>
+                    )}
                   </button>
+
+                  {status === 'error' && (
+                    <div className="text-sm text-red-300 mt-2">{errorMsg}</div>
+                  )}
                 </form>
               )}
             </div>
