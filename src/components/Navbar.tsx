@@ -2,11 +2,10 @@ import { useEffect, useState } from 'react';
 import { Menu, X } from 'lucide-react';
 
 const links = [
-  { href: '#om-mig', label: 'Om mig' },
+  { href: '#arbete', label: 'Arbete' },
   { href: '#process', label: 'Process' },
-  { href: '#priser', label: 'Priser' },
-  { href: '#portfolio', label: 'Portfolio' },
-  { href: '#kontakt', label: 'Kontakt' },
+  { href: '#pris', label: 'Pris' },
+  { href: '#om', label: 'Om' },
 ];
 
 export default function Navbar() {
@@ -22,58 +21,59 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white/95 backdrop-blur-md shadow-sm' : 'bg-transparent'
+      className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
+        scrolled
+          ? 'bg-cream/90 backdrop-blur-md border-b border-ink/8'
+          : 'bg-transparent'
       }`}
     >
-      <div className="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
-        <a href="#top" className="flex items-center" aria-label="Togethr">
-          <img
-            src="/transparentlogo.jpeg"
-            alt="Togethr"
-            className="h-9 sm:h-10 w-auto object-contain"
-          />
+      <div className="max-w-[1400px] mx-auto flex items-center justify-between px-6 sm:px-10 lg:px-16 py-5">
+        <a
+          href="#top"
+          className="font-serif-italic text-2xl text-ink leading-none tracking-tight"
+          aria-label="Togethr"
+        >
+          Togethr<span className="text-gold">.</span>
         </a>
 
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden md:flex items-center gap-10">
           {links.map((l) => (
             <a
               key={l.href}
               href={l.href}
-              className="text-sm text-navy/80 hover:text-gold transition-colors relative group"
+              className="text-[13px] text-ink/70 hover:text-ink transition-colors duration-300"
             >
               {l.label}
-              <span className="absolute -bottom-1 left-0 w-0 h-px bg-gold group-hover:w-full transition-all duration-300" />
             </a>
           ))}
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-4">
           <a
             href="#kontakt"
-            className="hidden sm:inline-flex items-center text-sm font-medium px-4 py-2 rounded-lg bg-navy text-white hover:bg-gold transition-colors"
+            className="hidden sm:inline-flex items-center text-[13px] text-ink hover:text-gold transition-colors duration-300"
           >
-            Kontakta mig
+            <span className="link-underline">Skriv till mig</span>
           </a>
           <button
-            className="md:hidden p-2 text-navy"
+            className="md:hidden p-2 text-ink -mr-2"
             onClick={() => setOpen((v) => !v)}
             aria-label="Toggle menu"
           >
-            {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </div>
 
       {open && (
-        <div className="md:hidden bg-white border-t border-navy/10">
-          <nav className="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-3">
+        <div className="md:hidden bg-cream border-t border-ink/8">
+          <nav className="max-w-[1400px] mx-auto px-6 py-6 flex flex-col">
             {links.map((l) => (
               <a
                 key={l.href}
                 href={l.href}
                 onClick={() => setOpen(false)}
-                className="text-base text-navy/80 hover:text-gold transition-colors py-2"
+                className="text-base text-ink/80 hover:text-ink transition-colors py-3 border-b border-ink/8 last:border-b-0"
               >
                 {l.label}
               </a>
@@ -81,9 +81,9 @@ export default function Navbar() {
             <a
               href="#kontakt"
               onClick={() => setOpen(false)}
-              className="mt-2 inline-flex items-center justify-center text-sm font-medium px-4 py-3 rounded-lg bg-navy text-white hover:bg-gold transition-colors"
+              className="mt-6 text-base text-ink py-3"
             >
-              Kontakta mig
+              <span className="link-underline">Skriv till mig →</span>
             </a>
           </nav>
         </div>
