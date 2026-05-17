@@ -6,17 +6,19 @@ import Pricing from './components/Pricing';
 import Portfolio from './components/Portfolio';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import Marquee from './components/Marquee';
 import useFadeInOnScroll from './hooks/useFadeInOnScroll';
 
 function App() {
   useFadeInOnScroll();
 
   return (
-    <div className="relative bg-white min-h-screen text-navy overflow-x-hidden">
+    <div className="relative bg-cream min-h-screen text-ink overflow-x-hidden">
       <Navbar />
       <main>
         <Hero />
         <About />
+        <Marquee items={['Hantverk på skärmen', 'Bohuslän', 'Designat från grunden', 'Lugnt och tydligt', 'Inga mallar']} />
         <Process />
         <Pricing />
         <Portfolio />
