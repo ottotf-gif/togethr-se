@@ -1,30 +1,80 @@
 export default function Portfolio() {
   return (
-    <section id="portfolio" className="relative py-24 sm:py-32 bg-navy/[0.02]">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="max-w-2xl mb-16 fade-in">
-          <span className="inline-block text-xs uppercase tracking-[0.25em] text-gold mb-4">
-            Portfolio
-          </span>
-          <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight text-navy text-balance">
-            Pågående projekt.
-          </h2>
+    <section id="arbete" className="relative py-28 sm:py-40 bg-ink text-cream">
+      <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16">
+        {/* Header */}
+        <div className="grid grid-cols-12 gap-y-6 mb-20 sm:mb-28 fade-in">
+          <div className="col-span-12 lg:col-span-3 flex flex-col gap-2">
+            <span className="eyebrow text-cream/45">N° 05</span>
+            <span className="eyebrow text-cream/45">Arbete</span>
+          </div>
+          <div className="col-span-12 lg:col-span-9">
+            <h2 className="font-serif text-[clamp(2.25rem,5.5vw,5rem)] font-light leading-[1.02] tracking-tight max-w-3xl text-balance">
+              Pågående <span className="font-serif-italic text-gold">projekt.</span>
+            </h2>
+          </div>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div className="fade-in group rounded-2xl overflow-hidden border border-navy/10 bg-white hover:border-gold/40 transition-colors">
-            <div className="relative aspect-[4/3] bg-navy/5 overflow-hidden">
+        {/* Featured project */}
+        <div className="grid grid-cols-12 gap-y-10 gap-x-8 items-end fade-in">
+          <div className="col-span-12 lg:col-span-8 lg:col-start-2">
+            <div className="relative aspect-[16/10] overflow-hidden bg-cream/5 border border-cream/10">
+              {/* Subtle placeholder pattern */}
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-navy/20 text-sm tracking-widest uppercase">
-                  Placeholder
-                </div>
+                <svg
+                  viewBox="0 0 400 240"
+                  className="w-full h-full opacity-30"
+                  preserveAspectRatio="xMidYMid slice"
+                  aria-hidden
+                >
+                  <defs>
+                    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#C9A84C" strokeWidth="0.5" />
+                    </pattern>
+                  </defs>
+                  <rect width="100%" height="100%" fill="url(#grid)" />
+                  <text
+                    x="50%"
+                    y="50%"
+                    textAnchor="middle"
+                    dominantBaseline="middle"
+                    fontFamily="Fraunces, serif"
+                    fontStyle="italic"
+                    fontSize="42"
+                    fill="#C9A84C"
+                    opacity="0.65"
+                  >
+                    Maltes Stig
+                  </text>
+                </svg>
               </div>
-              <div className="absolute top-4 left-4 inline-flex items-center px-3 py-1 rounded-full bg-gold text-white text-xs font-medium tracking-wide">
+              <div className="absolute top-6 left-6 inline-flex items-center gap-2 px-3 py-1.5 border border-gold/50 text-gold text-[11px] tracking-[0.22em] uppercase">
                 Lanseras maj 2026
               </div>
             </div>
-            <div className="p-6">
-              <h3 className="text-xl font-semibold text-navy">Maltes Stig</h3>
+          </div>
+
+          <div className="col-span-12 lg:col-span-3 lg:col-start-10 space-y-6">
+            <div>
+              <span className="eyebrow text-cream/45">Projekt 01</span>
+              <h3 className="mt-3 font-serif text-4xl sm:text-5xl font-light tracking-tight leading-[1.05]">
+                Maltes Stig
+              </h3>
+            </div>
+            <div className="hairline w-12 bg-gold" />
+            <p className="text-cream/65 leading-[1.65]">
+              Hemsida för ett lokalt företag — designad, byggd och redo att
+              lanseras i maj.
+            </p>
+            <div className="pt-2 grid grid-cols-2 gap-4 text-sm">
+              <div>
+                <div className="eyebrow text-cream/40 mb-1">År</div>
+                <div className="text-cream">2026</div>
+              </div>
+              <div>
+                <div className="eyebrow text-cream/40 mb-1">Status</div>
+                <div className="text-cream">Snart live</div>
+              </div>
             </div>
           </div>
         </div>
