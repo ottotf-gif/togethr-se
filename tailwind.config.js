@@ -4,7 +4,11 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        sans: ['Space Grotesk', 'system-ui', '-apple-system', 'sans-serif'],
+      },
+      colors: {
+        navy: '#1B2E4B',
+        gold: '#C9A84C',
       },
     },
   },
