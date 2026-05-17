@@ -20,7 +20,7 @@ export default function Hero() {
         </p>
 
         <div className="mt-12 flex justify-center">
-          
+          <a
             href="#kontakt"
             className="group inline-flex items-center gap-2 px-7 py-4 rounded-lg bg-navy text-white font-medium hover:bg-gold transition-colors"
           >
