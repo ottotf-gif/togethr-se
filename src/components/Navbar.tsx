@@ -37,7 +37,7 @@ export default function Navbar() {
 
         <nav className="hidden md:flex items-center gap-8">
           {links.map((l) => (
-            
+            <a
               key={l.href}
               href={l.href}
               className="text-sm text-navy/80 hover:text-gold transition-colors relative group"
@@ -49,7 +49,7 @@ export default function Navbar() {
         </nav>
 
         <div className="flex items-center gap-2">
-          
+          <a
             href="#kontakt"
             className="hidden sm:inline-flex items-center text-sm font-medium px-4 py-2 rounded-lg bg-navy text-white hover:bg-gold transition-colors"
           >
@@ -69,7 +69,7 @@ export default function Navbar() {
         <div className="md:hidden bg-white border-t border-navy/10">
           <nav className="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-3">
             {links.map((l) => (
-              
+              <a
                 key={l.href}
                 href={l.href}
                 onClick={() => setOpen(false)}
@@ -78,7 +78,7 @@ export default function Navbar() {
                 {l.label}
               </a>
             ))}
-            
+            <a
               href="#kontakt"
               onClick={() => setOpen(false)}
               className="mt-2 inline-flex items-center justify-center text-sm font-medium px-4 py-3 rounded-lg bg-navy text-white hover:bg-gold transition-colors"
