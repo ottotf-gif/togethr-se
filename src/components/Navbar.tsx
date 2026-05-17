@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 
 const links = [
-  { href: '#websites', label: 'Websites' },
-  { href: '#access', label: 'Early access' },
+  { href: '#om-mig', label: 'Om mig' },
+  { href: '#process', label: 'Process' },
+  { href: '#priser', label: 'Priser' },
+  { href: '#portfolio', label: 'Portfolio' },
+  { href: '#kontakt', label: 'Kontakt' },
 ];
 
 export default function Navbar() {
@@ -19,84 +21,73 @@ export default function Navbar() {
   }, []);
 
   return (
-    <motion.header
-      initial={{ y: -40, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-      className="fixed top-0 inset-x-0 z-50 px-4 sm:px-6 pt-4"
+    <header
+      className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
+        scrolled ? 'bg-white/95 backdrop-blur-md shadow-sm' : 'bg-transparent'
+      }`}
     >
-      <div
-        className={`max-w-6xl mx-auto flex items-center justify-between rounded-2xl px-4 sm:px-6 py-2.5 transition-all duration-500 ${
-          scrolled ? 'glass-light shadow-[0_8px_30px_rgba(15,23,42,0.06)]' : 'bg-transparent'
-        }`}
-      >
-        {/* Logo speaks for itself — no duplicated wordmark next to it */}
+      <div className="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
         <a href="#top" className="flex items-center" aria-label="Togethr">
           <img
-            src="/logotransparent.png"
+            src="/transparentlogo.jpeg"
             alt="Togethr"
-            className="h-8 sm:h-9 w-auto object-contain"
+            className="h-9 sm:h-10 w-auto object-contain"
           />
         </a>
 
-        <nav className="hidden md:flex items-center gap-7">
+        <nav className="hidden md:flex items-center gap-8">
           {links.map((l) => (
-            <a
+            
               key={l.href}
               href={l.href}
-              className="text-sm text-slate-600 hover:text-slate-900 transition-colors relative group"
+              className="text-sm text-navy/80 hover:text-gold transition-colors relative group"
             >
               {l.label}
-              <span className="absolute -bottom-1 left-0 w-0 h-px bg-blue-600 group-hover:w-full transition-all duration-300" />
+              <span className="absolute -bottom-1 left-0 w-0 h-px bg-gold group-hover:w-full transition-all duration-300" />
             </a>
           ))}
         </nav>
 
         <div className="flex items-center gap-2">
-          <a
-            href="#access"
-            className="hidden sm:inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-xl bg-slate-900 text-white hover:bg-blue-600 transition-colors"
+          
+            href="#kontakt"
+            className="hidden sm:inline-flex items-center text-sm font-medium px-4 py-2 rounded-lg bg-navy text-white hover:bg-gold transition-colors"
           >
-            Get early access
+            Kontakta mig
           </a>
           <button
-            className="md:hidden p-2 text-slate-700"
+            className="md:hidden p-2 text-navy"
             onClick={() => setOpen((v) => !v)}
             aria-label="Toggle menu"
           >
-            {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
       </div>
 
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="md:hidden max-w-6xl mx-auto mt-2 glass-light rounded-2xl p-4 flex flex-col gap-2"
-          >
+      {open && (
+        <div className="md:hidden bg-white border-t border-navy/10">
+          <nav className="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-3">
             {links.map((l) => (
-              <a
+              
                 key={l.href}
                 href={l.href}
                 onClick={() => setOpen(false)}
-                className="text-slate-700 text-sm py-2"
+                className="text-base text-navy/80 hover:text-gold transition-colors py-2"
               >
                 {l.label}
               </a>
             ))}
-            <a
-              href="#access"
+            
+              href="#kontakt"
               onClick={() => setOpen(false)}
-              className="mt-1 text-center text-sm font-medium px-4 py-2 rounded-xl bg-slate-900 text-white"
+              className="mt-2 inline-flex items-center justify-center text-sm font-medium px-4 py-3 rounded-lg bg-navy text-white hover:bg-gold transition-colors"
             >
-              Get early access
+              Kontakta mig
             </a>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.header>
+          </nav>
+        </div>
+      )}
+    </header>
   );
 }
