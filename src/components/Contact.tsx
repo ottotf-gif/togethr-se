@@ -61,7 +61,7 @@ export default function Contact() {
               <p className="text-white/75 leading-relaxed text-lg">
                 Jag hör av mig inom en dag.
               </p>
-              
+              <a
                 href="mailto:togethrse@gmail.com"
                 className="inline-flex items-center gap-2 text-gold hover:text-white transition-colors"
               >
