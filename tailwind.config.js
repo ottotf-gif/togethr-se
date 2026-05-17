@@ -4,11 +4,16 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Space Grotesk', 'system-ui', '-apple-system', 'sans-serif'],
+        sans: ['Inter Tight', 'system-ui', '-apple-system', 'sans-serif'],
+        serif: ['Fraunces', 'Times New Roman', 'serif'],
       },
       colors: {
+        cream: '#F5F2EC',
+        'cream-deep': '#ECE6D8',
         navy: '#1B2E4B',
+        'navy-soft': '#2A3F5F',
         gold: '#C9A84C',
+        ink: '#14192A',
       },
     },
   },
