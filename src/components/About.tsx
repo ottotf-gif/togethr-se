@@ -32,9 +32,8 @@ export default function About() {
           </div>
 
           <div className="col-span-12 sm:col-span-12 lg:col-span-5 lg:col-start-8 space-y-8 fade-in">
-            <p className="font-serif text-2xl sm:text-3xl text-ink leading-[1.35] tracking-tight text-pretty">
-              Jag är en ung webbutvecklare från Stenungsund med ett stort
-              intresse för design och kod.
+            <p className="font-serif text-2xl sm:text-3xl lg:text-[2rem] text-ink leading-[1.35] tracking-tight text-pretty">
+              Bor i Stenungsund. Jobbar med kod och design, ofta i samma andetag.
             </p>
             <div className="hairline w-12 bg-gold" />
             <p className="text-base sm:text-lg text-ink/70 leading-[1.7] text-pretty">
@@ -43,13 +42,13 @@ export default function About() {
               hemsida jag bygger gör jag från grunden, anpassad just för dig
               och ditt företag.
             </p>
-            <div className="pt-6 grid grid-cols-2 gap-6 text-sm">
-              <div>
-                <div className="eyebrow text-ink/45 mb-1">Bas</div>
+            <div className="pt-6 grid grid-cols-2 gap-6 text-sm border-t border-ink/10">
+              <div className="pt-6">
+                <div className="eyebrow text-ink/45 mb-2">Bas</div>
                 <div className="text-ink">Stenungsund</div>
               </div>
-              <div>
-                <div className="eyebrow text-ink/45 mb-1">Område</div>
+              <div className="pt-6">
+                <div className="eyebrow text-ink/45 mb-2">Område</div>
                 <div className="text-ink">Bohuslän & väster</div>
               </div>
             </div>
