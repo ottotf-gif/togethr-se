@@ -1,32 +1,25 @@
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import About from './components/About';
-import Process from './components/Process';
-import Pricing from './components/Pricing';
-import Portfolio from './components/Portfolio';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
-import Marquee from './components/Marquee';
-import useFadeInOnScroll from './hooks/useFadeInOnScroll';
+interface Props {
+  items: string[];
+}
 
-function App() {
-  useFadeInOnScroll();
-
+export default function Marquee({ items }: Props) {
+  // Duplicate items so the animation loops seamlessly
+  const doubled = [...items, ...items, ...items, ...items];
   return (
-    <div className="relative bg-cream min-h-screen text-ink overflow-x-hidden">
-      <Navbar />
-      <main>
-        <Hero />
-        <About />
-        <Marquee items={['Hantverk på skärmen', 'Bohuslän', 'Designat från grunden', 'Lugnt och tydligt', 'Inga mallar']} />
-        <Process />
-        <Pricing />
-        <Portfolio />
-        <Contact />
-      </main>
-      <Footer />
+    <div className="py-16 sm:py-20 border-y border-ink/10 bg-cream-deep/40 overflow-hidden">
+      <div className="marquee">
+        <div className="marquee__track">
+          {doubled.map((item, i) => (
+            <span
+              key={i}
+              className="font-serif-italic text-3xl sm:text-4xl text-ink/85 whitespace-nowrap flex items-baseline gap-12 leading-[1.4] py-2"
+            >
+              {item}
+              <span className="text-gold not-italic font-sans text-xl">✦</span>
+            </span>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
-
-export default App;
