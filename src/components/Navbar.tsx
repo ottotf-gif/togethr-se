@@ -30,10 +30,14 @@ export default function Navbar() {
       <div className="max-w-[1400px] mx-auto flex items-center justify-between px-6 sm:px-10 lg:px-16 py-5">
         <a
           href="#top"
-          className="font-serif-italic text-2xl text-ink leading-none tracking-tight"
+          className="flex items-center"
           aria-label="Togethr"
         >
-          Togethr<span className="text-gold">.</span>
+          <img
+            src="/transparentlogo.jpeg"
+            alt="Togethr"
+            className="h-9 sm:h-10 w-auto object-contain"
+          />
         </a>
 
         <nav className="hidden md:flex items-center gap-10">
