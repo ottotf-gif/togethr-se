@@ -29,8 +29,12 @@ export default function Footer() {
         <div className="hairline mt-16 mb-6" />
 
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-[12px] text-ink/55">
-          <div className="font-serif-italic text-base text-ink/70">
-            Togethr<span className="text-gold">.</span>
+          <div className="flex items-center">
+            <img
+              src="/transparentlogo.jpeg"
+              alt="Togethr"
+              className="h-8 w-auto object-contain"
+            />
           </div>
           <div className="tracking-wide">© 2026 Togethr — Stenungsund</div>
         </div>
