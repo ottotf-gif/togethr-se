@@ -43,20 +43,20 @@ export default function Process() {
           {steps.map((s) => (
             <div
               key={s.n}
-              className="group grid grid-cols-12 gap-4 sm:gap-8 py-10 sm:py-14 border-b border-ink/15 fade-in transition-colors duration-500 hover:bg-cream/60"
+              className="group grid grid-cols-12 gap-4 sm:gap-8 py-10 sm:py-14 border-b border-ink/15 items-baseline fade-in transition-colors duration-500 hover:bg-cream/60"
             >
               <div className="col-span-2 sm:col-span-1">
-                <span className="font-serif text-3xl sm:text-5xl font-light text-gold leading-none">
+                <span className="font-serif text-3xl sm:text-4xl font-light text-gold leading-none">
                   {s.n}
                 </span>
               </div>
               <div className="col-span-10 sm:col-span-4">
-                <h3 className="font-serif text-3xl sm:text-4xl font-light text-ink leading-tight tracking-tight">
+                <h3 className="font-serif text-3xl sm:text-4xl font-light text-ink leading-none tracking-tight">
                   {s.title}
                 </h3>
               </div>
-              <div className="col-span-12 sm:col-span-7 flex items-start">
-                <p className="text-base sm:text-lg text-ink/70 leading-[1.6] max-w-xl text-pretty">
+              <div className="col-span-12 sm:col-span-7">
+                <p className="text-base sm:text-lg text-ink/70 leading-[1.5] max-w-xl text-pretty sm:relative sm:-top-1">
                   {s.body}
                 </p>
               </div>
