@@ -33,7 +33,7 @@ export default function Footer() {
             <img
               src="/transparentlogo.jpeg"
               alt="Togethr"
-              className="h-8 w-auto object-contain"
+              className="h-10 w-auto object-contain"
             />
           </div>
           <div className="tracking-wide">© 2026 Togethr — Stenungsund</div>
