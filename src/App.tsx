@@ -5,6 +5,7 @@ import Process from './components/Process';
 import Pricing from './components/Pricing';
 import Portfolio from './components/Portfolio';
 import Contact from './components/Contact';
+import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import Marquee from './components/Marquee';
 import useFadeInOnScroll from './hooks/useFadeInOnScroll';
@@ -22,6 +23,7 @@ function App() {
         <Process />
         <Pricing />
         <Portfolio />
+        <FAQ />
         <Contact />
       </main>
       <Footer />
