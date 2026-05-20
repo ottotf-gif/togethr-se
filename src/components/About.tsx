@@ -48,7 +48,7 @@ export default function About() {
               </div>
               <div>
                 <div className="eyebrow text-ink/45 mb-2">Område</div>
-                <div className="text-ink">Bohuslän & väster</div>
+                <div className="text-ink">Sverige</div>
               </div>
             </div>
           </div>
