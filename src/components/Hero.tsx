@@ -8,7 +8,7 @@ export default function Hero() {
         {/* Eyebrow with location */}
         <div className="col-span-12 lg:col-span-3 flex flex-col gap-2">
           <span className="eyebrow text-ink/50">N° 01</span>
-          <span className="eyebrow text-ink/50">Stenungsund — Bohuslän</span>
+          <span className="eyebrow text-ink/50">Stenungsund, Sverige</span>
         </div>
 
         {/* The big statement */}
@@ -20,8 +20,8 @@ export default function Hero() {
 
           <div className="grid sm:grid-cols-12 gap-6 sm:gap-10 max-w-4xl">
             <p className="sm:col-span-7 text-lg sm:text-xl text-ink/75 leading-[1.55] text-pretty">
-              Jag bygger hemsidor för lokala företag i Bohuslän. Hantverk på
-              skärmen, för verksamheter som förtjänar bättre än en mall.
+              Jag bygger hemsidor för lokala företag som förtjänar
+              bättre än en mall.
             </p>
             <div className="sm:col-span-5 flex sm:justify-end items-end">
               <a
