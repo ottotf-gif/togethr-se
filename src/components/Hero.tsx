@@ -20,8 +20,9 @@ export default function Hero() {
 
           <div className="grid sm:grid-cols-12 gap-6 sm:gap-10 max-w-4xl">
             <p className="sm:col-span-7 text-lg sm:text-xl text-ink/75 leading-[1.55] text-pretty">
-              Jag bygger hemsidor för lokala företag som förtjänar
-              bättre än en mall.
+              Jag bygger hemsidor för företag — mobilanpassad,
+              SEO-optimerad och designad från grunden. Fast pris,
+              allt ingår.
             </p>
             <div className="sm:col-span-5 flex sm:justify-end items-end">
               <a
