@@ -8,6 +8,7 @@ import Contact from './components/Contact';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import Marquee from './components/Marquee';
+import ChatBot from './components/ChatBot';
 import useFadeInOnScroll from './hooks/useFadeInOnScroll';
 
 function App() {
@@ -18,7 +19,7 @@ function App() {
       <Navbar />
       <main>
         <Hero />
-        <Marquee items={['Hantverk på skärmen', 'Bohuslän', 'Designat från grunden', 'Lugnt och tydligt', 'Inga mallar']} />
+        <Marquee items={['Hantverk på skärmen', 'Byggd för din verksamhet', 'Designat från grunden', 'Lugnt och tydligt', 'Inga mallar']} />
         <About />
         <Process />
         <Pricing />
@@ -27,6 +28,7 @@ function App() {
         <Contact />
       </main>
       <Footer />
+      <ChatBot />
     </div>
   );
 }
