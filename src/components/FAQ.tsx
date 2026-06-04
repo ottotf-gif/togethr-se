@@ -3,7 +3,7 @@ import { useState } from 'react';
 const faqs = [
   {
     q: 'Vad kostar en hemsida?',
-    a: '300 kr i månaden, allt ingår — design, hosting, support och uppdateringar. Inga uppstartskostnader. Säg upp när du vill.',
+    a: 'Allt ingår — design, hosting, support och uppdateringar. Inga uppstartskostnader och inga överraskningar. Hör av dig så går vi igenom vad som passar ditt företag.',
   },
   {
     q: 'Hur lång tid tar det att bygga en hemsida?',
