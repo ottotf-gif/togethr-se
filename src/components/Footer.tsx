@@ -2,14 +2,14 @@ export default function Footer() {
   return (
     <footer className="relative bg-cream border-t border-ink/15">
       <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16 py-12 sm:py-16">
-        <div className="grid grid-cols-12 gap-y-10 gap-x-8 items-end">
+        <div className="grid grid-cols-12 gap-y-10 gap-x-8 items-start">
           <div className="col-span-12 lg:col-span-7">
             <p className="font-serif-italic text-4xl sm:text-5xl text-ink leading-[1.05] tracking-tight max-w-xl text-balance">
               Bygger lugnt,<br />från Bohuslän.
             </p>
           </div>
 
-          <div className="col-span-6 lg:col-span-2">
+          <div className="col-span-6 lg:col-span-2 lg:pt-2">
             <div className="eyebrow text-ink/45 mb-3">Kontakt</div>
             <a
               href="mailto:togethrse@gmail.com"
@@ -19,7 +19,7 @@ export default function Footer() {
             </a>
           </div>
 
-          <div className="col-span-6 lg:col-span-3">
+          <div className="col-span-6 lg:col-span-3 lg:pt-2">
             <div className="eyebrow text-ink/45 mb-3">Plats</div>
             <div className="text-sm text-ink/80">Stenungsund</div>
             <div className="text-sm text-ink/80">Bohuslän, Sverige</div>
