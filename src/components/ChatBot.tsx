@@ -7,7 +7,6 @@ interface Msg {
 
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xzdwbzzk';
 
-// Everything the bot knows about Togethr — its "training" on the site
 const KNOWLEDGE = `
 TOGETHR — fakta:
 - Togethr drivs av Otto, en ung webbutvecklare från Stenungsund.
@@ -63,6 +62,16 @@ export default function ChatBot() {
     if (open) endRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, open, loading]);
 
+  // Lock body scroll on mobile when chat is open
+  useEffect(() => {
+    if (open && window.innerWidth < 640) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [open]);
+
   const submitBooking = async (b: Record<string, string>) => {
     try {
       await fetch(FORMSPREE_ENDPOINT, {
@@ -77,7 +86,7 @@ export default function ChatBot() {
       });
       setBooked(true);
     } catch {
-      // booking fetch failed silently — Otto can still follow up from the conversation
+      // silent
     }
   };
 
@@ -130,59 +139,93 @@ export default function ChatBot() {
 
   return (
     <>
+      {/* Launcher button */}
       <button
         onClick={() => setOpen((v) => !v)}
         aria-label="Öppna chatt"
-        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300"
         style={{
-          background: open ? '#C9A84C' : '#1B2E4B',
-          color: open ? '#1B2E4B' : '#F5F2EC',
-          boxShadow: '0 8px 30px rgba(27,46,75,0.28)',
+          position: 'fixed',
+          bottom: 24,
+          right: 24,
+          zIndex: 50,
+          height: 52,
+          padding: open ? 0 : '0 22px',
+          width: open ? 52 : 'auto',
+          display: 'flex',
+          alignItems: 'center',
+          gap: 10,
+          background: '#1B2E4B',
+          color: '#F5F2EC',
+          border: 'none',
+          borderRadius: 4,
+          cursor: 'pointer',
+          fontFamily: "'Inter Tight', system-ui, sans-serif",
+          fontSize: 13,
+          letterSpacing: '0.02em',
+          transition: 'all 0.3s cubic-bezier(0.22,1,0.36,1)',
+          boxShadow: '0 6px 28px rgba(27,46,75,0.28)',
         }}
       >
         {open ? (
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M18 6L6 18M6 6l12 12" /></svg>
+          <span style={{ margin: '0 auto', fontSize: 18, lineHeight: 1 }}>✕</span>
         ) : (
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg>
+          <>
+            <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#C9A84C', flexShrink: 0 }} />
+            Chatta med oss
+          </>
         )}
       </button>
 
+      {/* Chat window */}
       {open && (
         <div
-          className="fixed bottom-24 right-6 z-50 w-[calc(100vw-3rem)] sm:w-[400px] rounded-3xl overflow-hidden flex flex-col"
+          className="tg-chat-window"
           style={{
-            height: 520,
-            maxHeight: 'calc(100vh - 8rem)',
+            position: 'fixed',
+            zIndex: 50,
             background: '#F5F2EC',
-            border: '1px solid rgba(20,25,42,0.12)',
-            boxShadow: '0 24px 70px rgba(27,46,75,0.32)',
+            display: 'flex',
+            flexDirection: 'column',
+            border: '1px solid rgba(20,25,42,0.15)',
+            borderRadius: 4,
+            overflow: 'hidden',
+            boxShadow: '0 24px 70px rgba(27,46,75,0.30)',
           }}
         >
-          {/* Header */}
-          <div style={{ background: '#1B2E4B', padding: '18px 22px', display: 'flex', alignItems: 'center', gap: 12 }}>
-            <div style={{ width: 38, height: 38, borderRadius: '50%', background: 'rgba(201,168,76,0.18)', border: '1px solid rgba(201,168,76,0.45)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <span style={{ fontFamily: "'Fraunces', serif", fontStyle: 'italic', color: '#C9A84C', fontSize: 18 }}>T</span>
+          {/* Header — editorial style with eyebrow */}
+          <div style={{ background: '#1B2E4B', padding: '20px 22px', position: 'relative' }}>
+            <div style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(201,168,76,0.9)', marginBottom: 6 }}>
+              Togethr — chatt
             </div>
-            <div>
-              <div style={{ color: '#F5F2EC', fontSize: 15, fontFamily: "'Fraunces', serif", letterSpacing: '-0.01em' }}>Togethr</div>
-              <div style={{ color: 'rgba(245,242,236,0.5)', fontSize: 11, letterSpacing: '0.05em' }}>Chatta med oss</div>
+            <div style={{ fontFamily: "'Fraunces', serif", fontStyle: 'italic', fontSize: 22, color: '#F5F2EC', lineHeight: 1 }}>
+              Hur kan jag hjälpa dig?
             </div>
+            <button
+              onClick={() => setOpen(false)}
+              aria-label="Stäng"
+              style={{ position: 'absolute', top: 18, right: 18, background: 'none', border: 'none', color: 'rgba(245,242,236,0.6)', cursor: 'pointer', fontSize: 18, lineHeight: 1, padding: 4 }}
+            >
+              ✕
+            </button>
           </div>
 
           {/* Messages */}
-          <div className="flex-1 overflow-y-auto" style={{ padding: '18px 16px', display: 'flex', flexDirection: 'column', gap: 12 }}>
+          <div className="tg-chat-messages" style={{ flex: 1, overflowY: 'auto', padding: '20px 18px', display: 'flex', flexDirection: 'column', gap: 14 }}>
             {messages.map((m, i) => (
-              <div key={i} style={{ display: 'flex', justifyContent: m.role === 'user' ? 'flex-end' : 'flex-start' }}>
+              <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: m.role === 'user' ? 'flex-end' : 'flex-start' }}>
+                <div style={{ fontSize: 9, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(20,25,42,0.4)', marginBottom: 5, paddingLeft: m.role === 'user' ? 0 : 2, paddingRight: m.role === 'user' ? 2 : 0 }}>
+                  {m.role === 'user' ? 'Du' : 'Togethr'}
+                </div>
                 <div
                   style={{
-                    maxWidth: '85%',
-                    padding: '11px 15px',
+                    maxWidth: '88%',
+                    padding: '12px 16px',
                     fontSize: 14,
-                    lineHeight: 1.55,
-                    borderRadius: m.role === 'user' ? '16px 16px 4px 16px' : '16px 16px 16px 4px',
+                    lineHeight: 1.6,
+                    borderRadius: 4,
                     background: m.role === 'user' ? '#1B2E4B' : '#FFFFFF',
                     color: m.role === 'user' ? '#F5F2EC' : '#14192A',
-                    border: m.role === 'user' ? 'none' : '1px solid rgba(20,25,42,0.08)',
+                    border: m.role === 'user' ? 'none' : '1px solid rgba(20,25,42,0.1)',
                   }}
                 >
                   {m.content}
@@ -190,17 +233,19 @@ export default function ChatBot() {
               </div>
             ))}
             {booked && (
-              <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
-                <div style={{ maxWidth: '85%', padding: '11px 15px', fontSize: 13, borderRadius: '16px 16px 16px 4px', background: 'rgba(201,168,76,0.15)', border: '1px solid rgba(201,168,76,0.4)', color: '#1B2E4B' }}>
-                  ✓ Din förfrågan är skickad till Otto — han hör av sig inom en dag!
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+                <div style={{ borderLeft: '2px solid #C9A84C', paddingLeft: 14, paddingTop: 2, paddingBottom: 2 }}>
+                  <div style={{ fontSize: 9, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#C9A84C', marginBottom: 3 }}>Skickat</div>
+                  <div style={{ fontSize: 13, color: '#1B2E4B', lineHeight: 1.5 }}>Din förfrågan är skickad till Otto — han hör av sig inom en dag.</div>
                 </div>
               </div>
             )}
             {loading && (
-              <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
-                <div style={{ background: '#FFFFFF', border: '1px solid rgba(20,25,42,0.08)', borderRadius: '16px 16px 16px 4px', padding: '13px 16px', display: 'flex', gap: 4 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+                <div style={{ fontSize: 9, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(20,25,42,0.4)', marginBottom: 5, paddingLeft: 2 }}>Togethr</div>
+                <div style={{ background: '#FFFFFF', border: '1px solid rgba(20,25,42,0.1)', borderRadius: 4, padding: '14px 16px', display: 'flex', gap: 5 }}>
                   {[0, 1, 2].map((i) => (
-                    <div key={i} style={{ width: 6, height: 6, borderRadius: '50%', background: 'rgba(20,25,42,0.35)', animation: `chatbounce 1s ${i * 150}ms infinite` }} />
+                    <div key={i} style={{ width: 5, height: 5, borderRadius: '50%', background: 'rgba(20,25,42,0.35)', animation: `chatbounce 1s ${i * 150}ms infinite` }} />
                   ))}
                 </div>
               </div>
@@ -208,30 +253,52 @@ export default function ChatBot() {
             <div ref={endRef} />
           </div>
 
-          {/* Input */}
-          <div style={{ borderTop: '1px solid rgba(20,25,42,0.1)', padding: 12, background: '#F5F2EC' }}>
-            <div style={{ display: 'flex', gap: 8 }}>
+          {/* Input — sharp, hairline divider */}
+          <div style={{ borderTop: '1px solid rgba(20,25,42,0.12)', padding: 14, background: '#F5F2EC' }}>
+            <div style={{ display: 'flex', gap: 8, alignItems: 'stretch' }}>
               <input
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && send()}
-                placeholder="Skriv ett meddelande..."
-                style={{ flex: 1, background: '#FFFFFF', border: '1px solid rgba(20,25,42,0.15)', borderRadius: 12, padding: '11px 15px', fontSize: 14, color: '#14192A', outline: 'none', fontFamily: 'inherit' }}
+                placeholder="Skriv ett meddelande…"
+                style={{ flex: 1, background: '#FFFFFF', border: '1px solid rgba(20,25,42,0.15)', borderRadius: 4, padding: '12px 14px', fontSize: 14, color: '#14192A', outline: 'none', fontFamily: "'Inter Tight', system-ui, sans-serif" }}
               />
               <button
                 onClick={send}
                 disabled={loading || !input.trim()}
                 aria-label="Skicka"
-                style={{ padding: '0 16px', borderRadius: 12, background: '#1B2E4B', color: '#F5F2EC', border: 'none', cursor: loading || !input.trim() ? 'default' : 'pointer', opacity: loading || !input.trim() ? 0.4 : 1, transition: 'opacity 0.2s' }}
+                style={{ padding: '0 18px', borderRadius: 4, background: '#C9A84C', color: '#1B2E4B', border: 'none', cursor: loading || !input.trim() ? 'default' : 'pointer', opacity: loading || !input.trim() ? 0.4 : 1, transition: 'opacity 0.2s', fontSize: 13, fontWeight: 600, letterSpacing: '0.02em' }}
               >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" /></svg>
+                Skicka
               </button>
             </div>
           </div>
         </div>
       )}
 
-      <style>{`@keyframes chatbounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }`}</style>
+      <style>{`
+        @keyframes chatbounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
+        .tg-chat-window {
+          bottom: 90px;
+          right: 24px;
+          width: 400px;
+          height: 540px;
+          max-height: calc(100vh - 120px);
+        }
+        @media (max-width: 640px) {
+          .tg-chat-window {
+            bottom: 0 !important;
+            right: 0 !important;
+            left: 0 !important;
+            top: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            max-height: 100% !important;
+            border-radius: 0 !important;
+            border: none !important;
+          }
+        }
+      `}</style>
     </>
   );
 }
