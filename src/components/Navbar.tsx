@@ -31,11 +31,11 @@ export default function Navbar() {
         <a
           href="#top"
           className="flex items-center"
-          aria-label="Togethr"
+          aria-label="Ottoniq"
         >
           <img
-            src="/transparentlogo.jpeg"
-            alt="Togethr"
+            src="/logo.png"
+            alt="Ottoniq"
             className="h-12 sm:h-14 w-auto object-contain"
           />
         </a>
