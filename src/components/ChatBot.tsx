@@ -8,8 +8,8 @@ interface Msg {
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xzdwbzzk';
 
 const KNOWLEDGE = `
-TOGETHR — fakta:
-- Togethr drivs av Otto, en ung webbutvecklare från Stenungsund.
+OTTONIQ — fakta:
+- Ottoniq drivs av Otto, en ung webbutvecklare från Stenungsund.
 - Bygger hemsidor för lokala företag, designade från grunden, mobilanpassade och SEO-optimerade.
 - Allt ingår: design, bygge, domän, hosting, support och löpande uppdateringar.
 - Kan även koppla in bokningssystem direkt på hemsidan.
@@ -17,21 +17,21 @@ TOGETHR — fakta:
 - Otto hör av sig inom en dag.
 - Senaste projekt: hemsida för Maltes Stig (maltesstig.com), live nu.
 - Process: 1) Samtal om vad du behöver  2) Otto designar och visar förslag  3) Bygger och justerar tills det känns rätt  4) Lansering tillsammans.
-- Kontakt: togethrse@gmail.com, telefon 070-422 38 87.
+- Kontakt: ottoniq@gmail.com, telefon 070-422 38 87.
 `;
 
-const SYSTEM_PROMPT = `Du är Togethrs vänliga chattassistent på hemsidan togethr.se. Du hjälper besökare och ditt främsta mål är att boka in ett kostnadsfritt möte (demo) med Otto.
+const SYSTEM_PROMPT = `Du är Ottoniqs vänliga chattassistent på hemsidan ottoniq.se. Du hjälper besökare och ditt främsta mål är att boka in ett kostnadsfritt möte (demo) med Otto.
 
 ${KNOWLEDGE}
 
 DITT UPPDRAG:
-1. Svara vänligt och kort på frågor om Togethr och hemsidor (på svenska, max 3-4 meningar).
+1. Svara vänligt och kort på frågor om Ottoniq och hemsidor (på svenska, max 3-4 meningar).
 2. Sträva alltid mot att boka ett möte. När någon visar minsta intresse, föreslå en kostnadsfri demo.
 3. För att boka behöver du samla in TRE saker: personens NAMN, deras EMAIL, och VAD de vill ha hjälp med (deras företag/behov). Fråga om en sak i taget, naturligt.
 4. När du har namn + email + vad de vill ha, bekräfta uppgifterna och skriv EXAKT denna rad på en egen rad sist i ditt svar (användaren ser inte denna rad, den används för bokningen):
 [[BOOKING]]{"name":"<namn>","email":"<email>","need":"<vad de vill ha>","time":"<önskad tid om angiven, annars 'flexibel'>"}[[/BOOKING]]
 5. Nämn ALDRIG pris. Säg att Otto går igenom det personligen på mötet.
-6. Om någon frågar om något helt orelaterat, svara vänligt att du helst pratar om hur Togethr kan hjälpa deras företag.
+6. Om någon frågar om något helt orelaterat, svara vänligt att du helst pratar om hur Ottoniq kan hjälpa deras företag.
 
 Var varm, personlig och inte säljig. Du representerar Otto.`;
 
@@ -51,7 +51,7 @@ function parseBooking(text: string): { clean: string; booking: Record<string, st
 export default function ChatBot() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Msg[]>([
-    { role: 'assistant', content: 'Hej! Jag hjälper dig gärna med frågor om Togethr — och kan boka in en kostnadsfri demo med Otto. Vad kan jag hjälpa dig med?' },
+    { role: 'assistant', content: 'Hej! Jag hjälper dig gärna med frågor om Ottoniq — och kan boka in en kostnadsfri demo med Otto. Vad kan jag hjälpa dig med?' },
   ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
@@ -118,7 +118,7 @@ export default function ChatBot() {
       if (!res.ok) {
         const errText = await res.text();
         console.error('OpenAI error:', res.status, errText);
-        setMessages((prev) => [...prev, { role: 'assistant', content: 'Hoppsan — jag kan inte svara just nu. Mejla gärna togethrse@gmail.com så svarar Otto direkt!' }]);
+        setMessages((prev) => [...prev, { role: 'assistant', content: 'Hoppsan — jag kan inte svara just nu. Mejla gärna ottoniq@gmail.com så svarar Otto direkt!' }]);
         setLoading(false);
         return;
       }
@@ -132,7 +132,7 @@ export default function ChatBot() {
       }
     } catch (e) {
       console.error(e);
-      setMessages((prev) => [...prev, { role: 'assistant', content: 'Något gick fel med uppkopplingen. Mejla gärna togethrse@gmail.com så svarar Otto direkt!' }]);
+      setMessages((prev) => [...prev, { role: 'assistant', content: 'Något gick fel med uppkopplingen. Mejla gärna ottoniq@gmail.com så svarar Otto direkt!' }]);
     }
     setLoading(false);
   };
@@ -195,7 +195,7 @@ export default function ChatBot() {
           {/* Header — editorial style with eyebrow */}
           <div style={{ background: '#1B2E4B', padding: '20px 22px', position: 'relative' }}>
             <div style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(201,168,76,0.9)', marginBottom: 6 }}>
-              Togethr — chatt
+              Ottoniq — chatt
             </div>
             <div style={{ fontFamily: "'Fraunces', serif", fontStyle: 'italic', fontSize: 22, color: '#F5F2EC', lineHeight: 1 }}>
               Hur kan jag hjälpa dig?
@@ -214,7 +214,7 @@ export default function ChatBot() {
             {messages.map((m, i) => (
               <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: m.role === 'user' ? 'flex-end' : 'flex-start' }}>
                 <div style={{ fontSize: 9, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(20,25,42,0.4)', marginBottom: 5, paddingLeft: m.role === 'user' ? 0 : 2, paddingRight: m.role === 'user' ? 2 : 0 }}>
-                  {m.role === 'user' ? 'Du' : 'Togethr'}
+                  {m.role === 'user' ? 'Du' : 'Ottoniq'}
                 </div>
                 <div
                   style={{
@@ -242,7 +242,7 @@ export default function ChatBot() {
             )}
             {loading && (
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                <div style={{ fontSize: 9, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(20,25,42,0.4)', marginBottom: 5, paddingLeft: 2 }}>Togethr</div>
+                <div style={{ fontSize: 9, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(20,25,42,0.4)', marginBottom: 5, paddingLeft: 2 }}>Ottoniq</div>
                 <div style={{ background: '#FFFFFF', border: '1px solid rgba(20,25,42,0.1)', borderRadius: 4, padding: '14px 16px', display: 'flex', gap: 5 }}>
                   {[0, 1, 2].map((i) => (
                     <div key={i} style={{ width: 5, height: 5, borderRadius: '50%', background: 'rgba(20,25,42,0.35)', animation: `chatbounce 1s ${i * 150}ms infinite` }} />
