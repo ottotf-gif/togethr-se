@@ -12,10 +12,10 @@ export default function Footer() {
           <div className="col-span-6 lg:col-span-2 lg:pt-2">
             <div className="eyebrow text-ink/45 mb-3">Kontakt</div>
             <a
-              href="mailto:togethrse@gmail.com"
+              href="mailto:ottoniq@gmail.com"
               className="block text-sm text-ink/80 hover:text-ink transition-colors"
             >
-              togethrse@gmail.com
+              ottoniq@gmail.com
             </a>
           </div>
 
@@ -31,12 +31,12 @@ export default function Footer() {
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-[12px] text-ink/55">
           <div className="flex items-center">
             <img
-              src="/transparentlogo.jpeg"
-              alt="Togethr"
+              src="/logo.png"
+              alt="Ottoniq"
               className="h-10 w-auto object-contain"
             />
           </div>
-          <div className="tracking-wide">© 2026 Togethr — Stenungsund</div>
+          <div className="tracking-wide">© 2026 Ottoniq — Stenungsund</div>
         </div>
       </div>
     </footer>
