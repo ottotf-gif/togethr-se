@@ -72,10 +72,10 @@ export default function Contact() {
               <div>
                 <div className="eyebrow text-ink/45 mb-2">Mejl</div>
                 <a
-                  href="mailto:togethrse@gmail.com"
+                  href="mailto:ottoniq@gmail.com"
                   className="text-lg text-ink"
                 >
-                  <span className="link-underline">togethrse@gmail.com</span>
+                  <span className="link-underline">ottoniq@gmail.com</span>
                 </a>
               </div>
               <div>
