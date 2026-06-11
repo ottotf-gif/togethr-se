@@ -17,7 +17,7 @@ OTTONIQ — fakta:
 - Otto hör av sig inom en dag.
 - Senaste projekt: hemsida för Maltes Stig (maltesstig.com), live nu.
 - Process: 1) Samtal om vad du behöver  2) Otto designar och visar förslag  3) Bygger och justerar tills det känns rätt  4) Lansering tillsammans.
-- Kontakt: ottoniq@gmail.com, telefon 070-422 38 87.
+- Kontakt: ottoniq.se@gmail.com, telefon 070-422 38 87.
 `;
 
 const SYSTEM_PROMPT = `Du är Ottoniqs vänliga chattassistent på hemsidan ottoniq.se. Du hjälper besökare och ditt främsta mål är att boka in ett kostnadsfritt möte (demo) med Otto.
@@ -118,7 +118,7 @@ export default function ChatBot() {
       if (!res.ok) {
         const errText = await res.text();
         console.error('OpenAI error:', res.status, errText);
-        setMessages((prev) => [...prev, { role: 'assistant', content: 'Hoppsan — jag kan inte svara just nu. Mejla gärna ottoniq@gmail.com så svarar Otto direkt!' }]);
+        setMessages((prev) => [...prev, { role: 'assistant', content: 'Hoppsan — jag kan inte svara just nu. Mejla gärna ottoniq.se@gmail.com så svarar Otto direkt!' }]);
         setLoading(false);
         return;
       }
@@ -132,7 +132,7 @@ export default function ChatBot() {
       }
     } catch (e) {
       console.error(e);
-      setMessages((prev) => [...prev, { role: 'assistant', content: 'Något gick fel med uppkopplingen. Mejla gärna ottoniq@gmail.com så svarar Otto direkt!' }]);
+      setMessages((prev) => [...prev, { role: 'assistant', content: 'Något gick fel med uppkopplingen. Mejla gärna ottoniq.se@gmail.com så svarar Otto direkt!' }]);
     }
     setLoading(false);
   };

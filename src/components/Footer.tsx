@@ -12,10 +12,10 @@ export default function Footer() {
           <div className="col-span-6 lg:col-span-2 lg:pt-2">
             <div className="eyebrow text-ink/45 mb-3">Kontakt</div>
             <a
-              href="mailto:ottoniq@gmail.com"
+              href="mailto:ottoniq.se@gmail.com"
               className="block text-sm text-ink/80 hover:text-ink transition-colors"
             >
-              ottoniq@gmail.com
+              ottoniq.se@gmail.com
             </a>
           </div>
 
