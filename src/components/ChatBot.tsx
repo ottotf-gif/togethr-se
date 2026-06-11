@@ -99,15 +99,13 @@ export default function ChatBot() {
     setLoading(true);
 
     try {
-      const res = await fetch('https://api.openai.com/v1/chat/completions', {
+      const res = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/ai-chat`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${import.meta.env.VITE_OPENAI_KEY}`,
+          Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
         },
         body: JSON.stringify({
-          model: 'gpt-4o-mini',
-          max_tokens: 350,
           messages: [
             { role: 'system', content: SYSTEM_PROMPT },
             ...next.map((m) => ({ role: m.role, content: m.content })),
